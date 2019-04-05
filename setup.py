@@ -1,16 +1,16 @@
 # -*- coding: utf-8 -*-
 
-from setuptools import setup
+from setuptools import setup, find_packages
 
 
 version = '1.0.0'
 
 
 setup(
-    name='djago-mix',
+    name='djangomix',
     version=version,
     keywords='Django Mix',
-    description='Pythonoic mix(originated by Laravel) function for working with laravel-mix inside django apps',
+    description='Django integration for Laravel Mix',
     long_description=open('README.md').read(),
 
     url='https://github.com/m-a-k-o/django-mix',
@@ -18,9 +18,15 @@ setup(
     author='Marek Racik',
     author_email='marek@racik.info',
 
-    packages=['django-mix'],
-    py_modules=[],
-    install_requires=[],
+    packages=find_packages(),
+    requires=[
+        'Django (>=1.11)',
+    ],
+    install_requires=[
+        'Django>=1.11',
+    ],
+
+    include_package_data=True,
 
     classifiers=[
         'Development Status :: 5 - Production/Stable',
