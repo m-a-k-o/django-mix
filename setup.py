@@ -23,7 +23,7 @@ setup(
     url='https://github.com/m-a-k-o/django-mix',
 
     author='Marek Racik',
-    author_email='marek@racik.info',
+    author_email='marek@idea-loop.com',
 
     packages=find_packages(),
     requires=[
