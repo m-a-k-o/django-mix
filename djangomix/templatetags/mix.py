@@ -11,11 +11,11 @@ PUBLIC_URL = getattr(settings, "LARAVELMIX_PUBLIC_URL", settings.STATIC_URL)
 @register.simple_tag
 def mix(path, manifest_directory=MANIFEST_DIRECTORY):
     os_sep = os.path.sep
+
+    # laravel-mix generate / on the path in manifest.json
     if path[0] != '/': # url separator
         path = f'/{path}' 
 
-    if manifest_directory and manifest_directory[0] != os_sep:
-        manifest_directory = f'{manifest_directory}'
 
     if os.path.exists(os.path.join(manifest_directory, 'hot')):
         # taken from https://github.com/laravel/framework/blob/master/src/Illuminate/Foundation/Mix.php
@@ -36,5 +36,4 @@ def mix(path, manifest_directory=MANIFEST_DIRECTORY):
     if path not in manifest:
         raise Exception('Unable to locate mix file: ' + path)
 
-    return PUBLIC_URL + manifest[path]
-
+    return  PUBLIC_URL + manifest[path]

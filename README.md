@@ -23,6 +23,9 @@ if (process.argv.includes('--browser-sync')) {
   mix.browserSync('localhost:8000')
 }
 
+
+## NOTE
+
 // setResroucesRoots add prefix to url() in scss on example: from /images/close.svg?a898fb5d07d8c21381d4566b74e12d93 to /static/images/close.svg?a898fb5d07d8c21381d4566b74e12d93
 mix.setResourceRoot('/static/')
 mix.setPublicPath('polls/static/')
