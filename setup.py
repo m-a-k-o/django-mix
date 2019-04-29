@@ -3,15 +3,22 @@
 from setuptools import setup, find_packages
 
 
-version = '1.0.0'
+version = '1.0.1'
 
+
+# read the contents of your README file
+from os import path
+this_directory = path.abspath(path.dirname(__file__))
+with open(path.join(this_directory, 'README.md'), encoding='utf-8') as f:
+        long_description = f.read()
 
 setup(
     name='djangomix',
     version=version,
     keywords='Django Mix',
     description='Django integration for Laravel Mix',
-    long_description=open('README.md').read(),
+    long_description=long_description,
+    long_description_content_type='text/markdown',
 
     url='https://github.com/m-a-k-o/django-mix',
 
