@@ -1,23 +1,31 @@
 import json
 import os
-
+from django.conf import settings
 from django import template
 
 register = template.Library()
 
+MANIFEST_DIRECTORY = getattr(settings, "LARAVELMIX_MANIFEST_DIRECTORY",'')
+PUBLIC_URL = getattr(settings, "LARAVELMIX_PUBLIC_URL", settings.STATIC_URL)
 
 @register.simple_tag
-def mix(path, manifest_directory=''):
-    if path[0] != '/':
-        path = f'/{path}'
+def mix(path, manifest_directory=MANIFEST_DIRECTORY):
+    os_sep = os.path.sep
 
-    if manifest_directory and manifest_directory[0] != '/':
-        manifest_directory = f'{manifest_directory}'
+    # laravel-mix generate / on the path in manifest.json
+    if path[0] != '/': # url separator
+        path = f'/{path}' 
 
-    if os.path.exists(manifest_directory + '/hot'):
-        return f'//localhost:8080{path}'
 
-    manifest_path = manifest_directory + '/mix-manifest.json'
+    if os.path.exists(os.path.join(manifest_directory, 'hot')):
+        # taken from https://github.com/laravel/framework/blob/master/src/Illuminate/Foundation/Mix.php
+        url = open(os.path.join(manifest_directory, 'hot')).read().strip()
+        if "http://" or "https://" in url:
+            return ":".join(url.split(":")[1:]) + path
+        else:
+            return f'//localhost:8080{path}'
+
+    manifest_path = os.path.join(manifest_directory ,'mix-manifest.json')
 
     if not os.path.exists(manifest_path):
         raise FileNotFoundError
@@ -28,5 +36,4 @@ def mix(path, manifest_directory=''):
     if path not in manifest:
         raise Exception('Unable to locate mix file: ' + path)
 
-    return '/static' + manifest[path]
-
+    return  PUBLIC_URL + manifest[path]
