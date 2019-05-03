@@ -10,10 +10,8 @@ Laravel Mix helper in python representation to easy usage with laravel-mix npm p
 pip install djangomix
 ```
 ### Laravel Mix NPM package:
-```
-npm install laravel-mix --save-dev
-cp node_modules/laravel-mix/setup/webpack.mix.js ./
-```
+[Follow instructions on Laravel Mix webpage](https://laravel-mix.com/docs/4.0/installation#stand-alone-project)
+
 Please, see example of webpack.mix.js configration below.
 
 ## Usage
