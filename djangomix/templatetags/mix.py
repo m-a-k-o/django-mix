@@ -33,7 +33,8 @@ def mix(path, manifest_directory=MANIFEST_DIRECTORY):
     with open(manifest_path, 'r') as f:
         manifest = json.load(f)
 
-    if path not in manifest:
-        raise Exception('Unable to locate mix file: ' + path)
-
-    return  PUBLIC_URL + manifest[path]
+    for key, value in manifest.items():
+        if path in key:
+            path = key
+            return  PUBLIC_URL + manifest[path]
+    raise Exception('Unable to locate mix file: ' + path)
