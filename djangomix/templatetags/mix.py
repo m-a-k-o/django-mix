@@ -5,8 +5,8 @@ from django import template
 
 register = template.Library()
 
-MANIFEST_DIRECTORY = getattr(settings, "LARAVELMIX_MANIFEST_DIRECTORY",'')
-PUBLIC_URL = getattr(settings, "LARAVELMIX_PUBLIC_URL", settings.STATIC_URL)
+MANIFEST_DIRECTORY = getattr(settings, 'LARAVELMIX_MANIFEST_DIRECTORY','')
+PUBLIC_URL = getattr(settings, 'LARAVELMIX_PUBLIC_URL', settings.STATIC_URL)
 
 @register.simple_tag
 def mix(path, manifest_directory=MANIFEST_DIRECTORY):
@@ -14,14 +14,14 @@ def mix(path, manifest_directory=MANIFEST_DIRECTORY):
 
     # laravel-mix generate / on the path in manifest.json
     if path[0] != '/': # url separator
-        path = f'/{path}' 
+        path = f'/{path}'
 
 
     if os.path.exists(os.path.join(manifest_directory, 'hot')):
         # taken from https://github.com/laravel/framework/blob/master/src/Illuminate/Foundation/Mix.php
         url = open(os.path.join(manifest_directory, 'hot')).read().strip()
-        if "http://" or "https://" in url:
-            return ":".join(url.split(":")[1:]) + path
+        if 'http://' or 'https://' in url:
+            return ':'.join(url.split(':')[1:]) + path
         else:
             return f'//localhost:8080{path}'
 
