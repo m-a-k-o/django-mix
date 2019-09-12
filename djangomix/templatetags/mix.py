@@ -36,5 +36,6 @@ def mix(path, manifest_directory=MANIFEST_DIRECTORY):
     for key, value in manifest.items():
         if path in key:
             path = key
-            return  (PUBLIC_URL + manifest[path]).replace('//', '/')
+            full_path = f"{PUBLIC_URL.rstrip('/')}/{manifest[path].lstrip('/')}"
+            return full_path
     raise Exception('Unable to locate mix file: ' + path)
