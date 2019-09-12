@@ -28,7 +28,8 @@ def mix(path, manifest_directory=MANIFEST_DIRECTORY):
     manifest_path = os.path.join(manifest_directory ,'mix-manifest.json')
 
     if not os.path.exists(manifest_path):
-        raise FileNotFoundError
+        raise FileNotFoundError('Unable to locate manifest file: '
+                                + manifest_path)
 
     with open(manifest_path, 'r') as f:
         manifest = json.load(f)
