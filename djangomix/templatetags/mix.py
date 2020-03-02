@@ -10,8 +10,9 @@ PUBLIC_URL = getattr(settings, 'LARAVELMIX_PUBLIC_URL', settings.STATIC_URL)
 
 
 @register.simple_tag
-def mix(path, manifest_directory):
-    manifest_directory = MANIFEST_DIRECTORY
+def mix(path, manifest_directory=None):
+    if manifest_directory is None:
+        manifest_directory = MANIFEST_DIRECTORY
 
     # laravel-mix generate / on the path in manifest.json
     if path[0] != '/':  # url separator
